@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+	<groupId>com.redhat.tutorials</groupId>
+	<artifactId>simpleSoapRestSvc-parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+</parent>
+	<artifactId>environment-build</artifactId>
+	<properties>
+
+	</properties>
+
+	<!-- alternatively run this to deploy mvn deploy -DaltDeploymentRepository=releaseRepository::default::http://admin:admin@192.168.100.160:8181/maven/upload/ -->
+	<!-- <distributionManagement>
+		<repository>
+			<id>local-maven-server</id>
+			<url>http://admin:admin@localhost:8181/maven/upload/</url>
+		</repository>
+	</distributionManagement> -->
+
+	<dependencies>
+		<dependency>
+			<groupId>com.redhat.tutorials</groupId>
+			<artifactId>simpleSoapRestSvc</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>zip</type>
+      <classifier>profile</classifier>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+   <plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+				<version>1.2.0.redhat-630187</version>
+				<configuration>
+				<jolokiaUrl>http://admin:admin@localhost:8181/jolokia</jolokiaUrl>
+			</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
