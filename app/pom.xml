@@ -30,6 +30,7 @@
 			camel-bindy
 			camel-stream
 			camel-mvel
+			wrap
 		</fabric8.features>
 		<fabric8.bundles></fabric8.bundles>
 	</properties>

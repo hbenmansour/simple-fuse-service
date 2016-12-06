@@ -3,9 +3,9 @@
     <mirror>
       <!--This sends everything else to /public -->
       <id>nexus</id>
-      <mirrorOf>external:*</mirrorOf>
+      <mirrorOf>*</mirrorOf>
       <!-- your address may differ: -->
-      <url>http://localhost:8080/nexus/content/groups/public</url>
+      <url>http://localhost:10001/nexus/content/groups/public/</url>
     </mirror>
   </mirrors>
   <profiles>
