@@ -29,12 +29,12 @@
 	</properties>
 
 	<!-- alternatively run this to deploy mvn deploy -DaltDeploymentRepository=releaseRepository::default::http://admin:admin@192.168.100.160:8181/maven/upload/ -->
-	<!-- <distributionManagement>
+	<distributionManagement>
 		<repository>
-			<id>local-maven-server</id>
-			<url>http://admin:admin@localhost:8181/maven/upload/</url>
+			<id>nexus</id>
+			<url>http://admin:admin123@localhost:10001/nexus/content/repositories/snapshots</url>
 		</repository>
-	</distributionManagement> -->
+	</distributionManagement>
 
 	<dependencies>
 		<!--
