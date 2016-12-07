@@ -3,33 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.redhat.tutorials</groupId>
-	<artifactId>simpleSoapRestSvc-parent</artifactId>
+  <groupId>org.jboss.quickstarts.fuse</groupId>
+	<artifactId>beginner-camel-eips-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<properties>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- fabric8 props -->
-		<fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
-		<fabric8.jolokiaUrl>http://admin:admin@localhost:8181/jolokia</fabric8.jolokiaUrl>
-		<!-- alternatively run this to depoloy :  mvn fabric8:deploy -Dfabric8.jolokiaUrl=http://admin:admin@yourHostName:8181/jolokia -->
-		<fabric8.useResolver>false</fabric8.useResolver>
-		<fabric8.minInstanceCount>0</fabric8.minInstanceCount>
-		<fabric8.updoad>true</fabric8.updoad>
-		<fabric8.features>
-			camel-amq
-			camel-jms
-			camel-jackson
-			camel-jaxb
-			camel-cxf
-			camel-netty4-http
-			camel-bindy
-			camel-stream
-			camel-mvel
-		</fabric8.features>
-		<fabric8.bundles></fabric8.bundles>
-	</properties>
 
 	<!-- alternatively run this to deploy mvn deploy -DaltDeploymentRepository=releaseRepository::default::http://admin:admin@192.168.100.160:8181/maven/upload/ -->
 	<!-- <distributionManagement>
@@ -102,5 +79,5 @@
 			<url>https://maven.repository.redhat.com/ga</url>
 		</pluginRepository>
 	</pluginRepositories>
-	
+
 </project>

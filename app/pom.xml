@@ -4,34 +4,28 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-	<groupId>com.redhat.tutorials</groupId>
-	<artifactId>simpleSoapRestSvc-parent</artifactId>
+	<groupId>org.jboss.quickstarts.fuse</groupId>
+	<artifactId>beginner-camel-eips-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 </parent>
 	<packaging>bundle</packaging>
-	<artifactId>simpleSoapRestSvc</artifactId>
+	<artifactId>beginner-camel-eips</artifactId>
 	<properties>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- fabric8 props -->
-		<fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
-		<fabric8.jolokiaUrl>http://admin:admin@localhost:8181/jolokia</fabric8.jolokiaUrl>
-		<!-- alternatively run this to depoloy :  mvn fabric8:deploy -Dfabric8.jolokiaUrl=http://admin:admin@yourHostName:8181/jolokia -->
-		<fabric8.useResolver>false</fabric8.useResolver>
-		<fabric8.minInstanceCount>0</fabric8.minInstanceCount>
-		<fabric8.updoad>true</fabric8.updoad>
-		<fabric8.features>
-			camel-amq
-			camel-jms
-			camel-jackson
-			camel-jaxb
-			camel-cxf
-			camel-netty4-http
-			camel-bindy
-			camel-stream
-			camel-mvel
-		</fabric8.features>
-		<fabric8.bundles></fabric8.bundles>
+    <version.maven-bundle-plugin>2.3.7</version.maven-bundle-plugin>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+
+    <!-- the version of the BOM, defining all the dependency versions -->
+    <fabric.version>1.2.0.redhat-630187</fabric.version>
+
+    <!-- fabric8 deploy profile configuration -->
+    <fabric8.profile>quickstarts-beginner-camel.eips</fabric8.profile>
+    <fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
+    <fabric8.features></fabric8.features>
+
+      <!-- the version of the JBoss Fuse BOM, defining all the dependency versions -->
+      <jboss.fuse.bom.version>6.3.0.redhat-187</jboss.fuse.bom.version>
 	</properties>
 
 	<!-- alternatively run this to deploy mvn deploy -DaltDeploymentRepository=releaseRepository::default::http://admin:admin@192.168.100.160:8181/maven/upload/ -->
@@ -43,76 +37,38 @@
 	</distributionManagement> -->
 
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-blueprint</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test-blueprint</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-amq</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jackson</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jaxb</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-cxf</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-netty-server</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-netty-client</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-netty4-http</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-bindy</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-stream</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-mvel</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		<!--
+		      For this example, we will be using the OSGi Blueprint XML syntax for Apache Camel.
+		    -->
+		    <dependency>
+		      <groupId>org.apache.camel</groupId>
+		      <artifactId>camel-blueprint</artifactId>
+		    </dependency>
+
+		    <!--
+		      For logging, we will use SLF4J, which is also available in the container by default.
+		    -->
+		    <dependency>
+		      <groupId>org.slf4j</groupId>
+		      <artifactId>slf4j-api</artifactId>
+		    </dependency>
+		    <!--
+		      Dependencies with scope 'test' will be ignored when installing this Fuse Application Bundle (FAB) in the container
+		      but they will be available in our test classes.q
+		    -->
+		    <dependency>
+		      <groupId>junit</groupId>
+		      <artifactId>junit</artifactId>
+		      <scope>test</scope>
+		    </dependency>
+		    <!--
+		      Add the slf4j-log4j12 dependency jar for testing
+		    -->
+		    <dependency>
+		      <groupId>org.slf4j</groupId>
+		      <artifactId>slf4j-log4j12</artifactId>
+		      <scope>test</scope>
+		    </dependency>
 	</dependencies>
 
 	<build>
@@ -134,16 +90,11 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.7</version>
-				<extensions>true</extensions>
-				<!-- <configuration>
-					<instructions>
-						<DynamicImport-Package>*</DynamicImport-Package>
-					</instructions>
-				</configuration> -->
-			</plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${version.maven-bundle-plugin}</version>
+        <extensions>true</extensions>
+      </plugin>
 			<plugin>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-maven-plugin</artifactId>
@@ -167,29 +118,6 @@
                         </goals>
                     </execution>
                 </executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>3.1.5.redhat-630187</version>
-				<executions>
-				<execution>
-					<id>generate-sources</id>
-					<phase>generate-sources</phase>
-					<goals>
-						<goal>wsdl2java</goal>
-					</goals>
-					<configuration>
-					<sourceRoot>${basedir}/src/main/java</sourceRoot>
-					<wsdlOptions>
-					<wsdlOption>
-					<wsdl>${basedir}/src/main/resources/wsdl/businessService.wsdl</wsdl>
-					<wsdlLocation>classpath:wsdl/businessService.wsdl</wsdlLocation>
-					</wsdlOption>
-					</wsdlOptions>
-					</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
