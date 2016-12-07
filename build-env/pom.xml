@@ -21,9 +21,8 @@
 			<groupId>org.jboss.quickstarts.fuse</groupId>
 			<artifactId>beginner-camel-eips</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<type>zip</type>
-      <classifier>profile</classifier>
-		</dependency>
+			<type>jar</type>
+	  </dependency>
 	</dependencies>
 
 
@@ -35,6 +34,7 @@
 				<version>1.2.0.redhat-630187</version>
 				<configuration>
 				<jolokiaUrl>http://admin:admin@localhost:8181/jolokia</jolokiaUrl>
+				<artifactBundleClassifier>profile</artifactBundleClassifier>
 			</configuration>
 			</plugin>
 		</plugins>
